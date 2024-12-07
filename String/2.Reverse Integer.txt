@@ -1,0 +1,48 @@
+//Given a signed 32-bit integer x, return x with its digits reversed.
+//If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+//Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+
+//Example 1:
+//Input: x = 123
+//Output: 321
+
+//Example 2:
+//Input: x = -123
+//Output: -321
+
+//Example 3:
+//Input: x = 120
+//Output: 21
+
+public class Solution {
+	public static void main(String[] args) {
+		int x = -2147483648;
+		System.out.println(reverse(x));
+	}
+	
+    private static int reverse(int x) {
+    	char[] c;
+    	long l = x;
+    	
+    	if(l<0) {
+    		c = (Long.toString(0-l)).toCharArray();
+    		reverseCharArr(c);
+    		x = (0 - Long.valueOf(new String(c))) < Integer.MIN_VALUE ? 0 : 0 - Integer.valueOf(new String(c));
+    	}
+    	else {
+    		c = (Long.toString(l)).toCharArray();
+    		reverseCharArr(c);
+    		x = (Long.valueOf(new String(c))) > Integer.MAX_VALUE ? 0 : Integer.valueOf(new String(c));
+    	}
+    	
+    	return x;
+    }
+    
+    private static void reverseCharArr(char[] c) {
+    	for(int i=0; i<c.length/2; i++) {
+    		char temp = c[i];
+        	c[i] = c[c.length-i-1];
+        	c[c.length-i-1] = temp;
+    	}
+    }
+}
