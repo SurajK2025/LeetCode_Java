@@ -1,0 +1,39 @@
+//Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+//A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters
+//without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+
+//Example 1:
+//Input: s = "abc", t = "ahbgdc"
+//Output: true
+
+//Example 2:
+//Input: s = "axc", t = "ahbgdc"
+//Output: false
+
+public class Solution {
+	public static void main(String[] args) {
+		String s = "abc", t = "ahchbgdc";
+		System.out.println(isSubsequence(s, t));
+	}
+
+    private static boolean isSubsequence(String s, String t) {
+    	String temp = t;
+    	int i = 0, j = -1;
+    	
+    	while(i < s.length()) {
+    		if(t.contains(String.valueOf(s.charAt(i)))) {
+    			if(j<t.indexOf(s.charAt(i))) {
+    				j = t.indexOf(s.charAt(i));
+    			}
+    			else {
+    				return false;
+    			}
+    		}
+    		else {
+    			return false;
+    		}
+    		i++;
+    	}
+    	return true;
+    }
+}
