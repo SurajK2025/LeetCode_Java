@@ -1,0 +1,95 @@
+//Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+//1.Each row must contain the digits 1-9 without repetition.
+//2.Each column must contain the digits 1-9 without repetition.
+//3.Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		char[][] board = 
+			{{'.','4','.','.','.','.','.','.','.'},
+			 {'.','.','4','.','.','.','.','.','.'},
+			 {'.','.','.','1','.','.','7','.','.'},
+			 {'.','.','.','.','.','.','.','.','.'},
+			 {'.','.','.','3','.','.','.','6','.'},
+			 {'.','.','.','.','.','6','.','9','.'},
+			 {'.','.','.','.','1','.','.','.','.'},
+			 {'.','.','.','.','.','.','2','.','.'},
+			 {'.','.','.','8','.','.','.','.','.'}};
+
+		System.out.println(isValidSudoku(board));
+
+	}
+
+	private static boolean isValidSudoku(char[][] board) {
+		Map<Character, Integer> hashmapRow = new HashMap<>();
+		Map<Character, Integer> hashmapColumn = new HashMap<>();
+		
+		Map<Character, Integer> square1 = new HashMap<>();
+		Map<Character, Integer> square2 = new HashMap<>();
+		Map<Character, Integer> square3 = new HashMap<>();
+
+		for(int i=0; i<9; i++) {
+			hashmapRow.clear();
+			hashmapColumn.clear();
+			
+			
+			for(int j=0; j<9; j++) {
+				if(board[i][j] != '.') {
+					if(hashmapRow.containsKey(board[i][j])) {
+						return false;
+					}
+					else {
+						hashmapRow.put(board[i][j], 1);
+					}
+				}
+
+				if(board[j][i] != '.') {
+					if(hashmapColumn.containsKey(board[j][i])) {
+						return false;
+					}
+					else {
+						hashmapColumn.put(board[j][i], 1);
+					}
+				}
+				
+				if((i==0 || i==3 || i==6) && j==0) {
+					square1.clear();
+					square2.clear();
+					square3.clear();
+				}
+				
+				if(j>=0 && j<3 && board[i][j] != '.') {
+					if(square1.containsKey(board[i][j])) {
+						return false;
+					}
+					else {
+						square1.put(board[i][j], 1);
+					}
+				}
+					
+				if(j>=3 && j<6 && board[i][j] != '.') {
+					if(square2.containsKey(board[i][j])) {
+						return false;
+					}
+					else {
+						square2.put(board[i][j], 1);
+					}
+				}
+						
+				if(j>=6 && j<9 && board[i][j] != '.') {
+					if(square3.containsKey(board[i][j])) {
+						return false;
+					}
+					else {
+						square3.put(board[i][j], 1);
+					}
+				}
+			}
+		}
+		return true;
+	}
+}
