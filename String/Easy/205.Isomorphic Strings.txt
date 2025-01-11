@@ -1,0 +1,66 @@
+//Given two strings s and t, determine if they are isomorphic.
+//Two strings s and t are isomorphic if the characters in s can be replaced to get t.
+//All occurrences of a character must be replaced with another character while preserving the order of characters.
+//No two characters may map to the same character, but a character may map to itself.
+
+//Example 1:
+//Input: s = "egg", t = "add"
+//Output: true
+//Explanation:The strings s and t can be made identical by:
+//    Mapping 'e' to 'a'.
+//    Mapping 'g' to 'd'.
+//
+//Example 2:
+//Input: s = "foo", t = "bar"
+//Output: false
+//Explanation:The strings s and t can not be made identical as 'o' needs to be mapped to both 'a' and 'r'.
+//
+//Example 3:
+//Input: s = "paper", t = "title"
+//Output: true
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Solution {
+	public static void main(String[] args) {
+		String s = "egg", t = "add";
+		System.out.println(isIsomorphic(s, t));
+	}
+
+    private static boolean isIsomorphic(String s, String t) {
+    	int count = 0;
+    	Map<Character, Integer> hashmap = new HashMap<>();
+    	
+    	for(char c : s.toCharArray()) {
+    		if(!hashmap.containsKey(c)) {
+    			hashmap.put(c, count);
+    			count++;
+    		}
+    	}
+    	
+    	List<Integer> list1 = new ArrayList<>();
+    	for(char c : s.toCharArray()) {
+    		list1.add(hashmap.get(c));
+    	}
+    	
+    	count = 0;
+    	hashmap.clear();
+    	for(char c : t.toCharArray()) {
+    		if(!hashmap.containsKey(c)) {
+    			hashmap.put(c, count);
+    			count++;
+    		}
+    	}
+    	
+    	List<Integer> list2 = new ArrayList<>();
+    	for(char c : t.toCharArray()) {
+    		list2.add(hashmap.get(c));
+    	}
+
+    	if(list1.equals(list2)) return true;
+    	return false;
+    }
+}
