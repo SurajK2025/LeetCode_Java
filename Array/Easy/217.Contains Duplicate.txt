@@ -24,17 +24,9 @@ public class Solution {
 	}
 	
 	private static boolean containsDuplicate(int[] nums) {
-		Map<Integer, Integer> hashmap = new HashMap<>();
-		
-		for(int i=0; i<nums.length; i++) {
-			// If the current element already exists in the hashmap, it means we have encountered a duplicate, so return true.
-			if(hashmap.containsKey(nums[i])) {
-				return true;
-			}
-			// Otherwise, add the current element to the hashmap.
-			else {
-				hashmap.put(nums[i], i);
-			}
+		Set<Integer> set = new HashSet<>();
+		for(int i : nums) {
+			if(!set.add(i)) return true;
 		}
 		return false;
 	}
