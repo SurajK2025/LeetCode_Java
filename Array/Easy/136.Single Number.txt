@@ -26,18 +26,13 @@ public class Tester3 {
 	}
 	
 	private static int singleNumber(int[] nums) {
-		Set<Integer> hashSet = new HashSet<>();
 		Map<Integer, Integer> hashMap = new HashMap<>();
 		
-		for(int i=0; i<nums.length; i++) {
-			if(hashSet.add(nums[i])) {
-				hashMap.put(nums[i], 1);
-			}
-			else {
-				hashMap.remove(nums[i]);
-			}
+		for(Integer i : nums) {
+			if(map.containsKey(i)) map.remove(i);
+			else map.put(i, 1);
 		}
-		return (Integer) hashMap.keySet().toArray()[0];
+		return (int) hashMap.keySet().toArray()[0];
     }
 	
     // The XOR operator (^) has the following properties:
