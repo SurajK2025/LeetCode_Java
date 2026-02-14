@@ -20,14 +20,11 @@ public class Solution {
 	}
 	
 	private static int largestAltitude(int[] gain) {
-		int max = 0+gain[0];
-		int sum = 0+gain[0];
-		
-		for(int i=1; i<gain.length; i++) {
-			sum = sum+gain[i];
-			if(sum>max) max = sum;
+		int highestAltitude = 0, currAltitude = 0;
+		for(int i : gain) {
+			currAltitude += i;
+			if(currAltitude > highestAltitude) highestAltitude = currAltitude;
 		}
-		
-		return max>0?max:0;
+		return highestAltitude;
 	}
 }
